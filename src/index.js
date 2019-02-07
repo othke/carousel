@@ -61,17 +61,24 @@ class Wrapper extends React.Component {
   }
 
   checkLeftOffset = thumbNode => {
-    console.log('_____________________________')
-    console.log(`offsetLeft ${thumbNode.offsetLeft}`)
-    console.log(`offsetLeft + thumb width ${thumbNode.offsetLeft + thumbNode.clientWidth}`)
-    const offsetLeftThumb = thumbNode.offsetLeft + thumbNode.clientWidth;
+    const thumbWidth = thumbNode.getBoundingClientRect().width
+    const thumbLeftPosition = thumbNode.offsetLeft
     const wrapperNode = this.wrapperRef.current
-    if (offsetLeftThumb > wrapperNode.clientWidth) {
-      const offsetLeftThumbDelta = offsetLeftThumb - wrapperNode.clientWidth
-      console.log(`outside of ${offsetLeftThumbDelta}`)
-      const ulNode = this.ulRef.current;
-      ulNode.style.left = `-${offsetLeftThumbDelta}px`;
+    const wrapperWidth = wrapperNode.getBoundingClientRect().width;
+    console.log('__________________________________')
+    console.log(`thumbLeftPosition ${thumbLeftPosition}`)
+    const ulNode = this.ulRef.current;
+
+    // depassement à droite
+    if (thumbLeftPosition + thumbWidth > wrapperWidth ) {
+      const outsideOffset = wrapperWidth - (thumbLeftPosition + thumbWidth)
+      console.log(`outside ${outsideOffset}`)
+      ulNode.style.left = `${outsideOffset}px`;
     }
+    else if(thumbLeftPosition < thumbWidth) {
+      ulNode.style.left = `0`;
+    }
+
   };
 
   render() {
@@ -102,9 +109,12 @@ class App extends React.Component {
   changePhoto = evo => {
     const { images } = this.props;
     const { currentIndex } = this.state;
-    const newIndex = currentIndex + evo;
-    if (newIndex < 0 || newIndex > images.length - 1) {
-      return;
+    let newIndex = currentIndex + evo;
+    if(newIndex < 0) {
+      newIndex = images.length -1
+    }
+    else if (newIndex >= images.length){
+      newIndex = 0
     }
     this.setState({ currentIndex: newIndex });
   };

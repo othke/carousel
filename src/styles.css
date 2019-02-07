@@ -50,6 +50,7 @@ cursor: pointer;
 }
 
 .thumb {
+  box-sizing: border-box;
   margin: 5px;
   border: solid 2px transparent;
 }
