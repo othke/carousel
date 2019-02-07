@@ -1,0 +1,64 @@
+.App {
+  height: 100vh;
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+  height: 600px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+font-size: 4rem;
+font-weight: 900;
+margin: 5px;
+padding: 20px;
+border: solid 1px black;
+cursor: pointer;
+}
+
+
+.mainImage {
+  width: 600px;
+  height: 100%;
+}
+
+.wrapper {
+  position: relative;
+  width: 800px;
+  height: 120px;
+  border: solid 1px red;
+  overflow: hidden;
+}
+
+.thumbList {
+  left: 0px;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  transition: all 0.25s ease-in;
+}
+
+.thumb {
+  margin: 5px;
+  border: solid 2px transparent;
+}
+
+.thumb img {
+  width: 100px;
+  height: 100px;
+}
+
+.focus {
+  border: solid 2px aqua;
+}
